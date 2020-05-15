@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import '../models/todo.dart';
 
@@ -11,6 +12,11 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   @override
   ToDoState get initialState => ToDoInitial();
 
+  void newToDo(toDoObject)
+  {
+    add(AddToDoEvent(toDoObject));
+  }
+
   @override
   Stream<ToDoState> mapEventToState(
     ToDoEvent event,
@@ -18,6 +24,10 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     if(event is GetToDoEvent)
     {
       yield state;
+    }
+    else if(event is AddToDoEvent)
+    {
+      yield ToDoListState(state.todoList..insert(0,event.toDoObject),);
     }
   }
 }

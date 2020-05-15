@@ -1,5 +1,6 @@
 class ToDoModel{
   final String id;
+  bool isCompleted=false;
   String title;
   String description;
   DateTime deadline;

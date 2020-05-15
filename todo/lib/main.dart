@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (context) => HomePage(),
+          NewToDo.routeName:(context)=>NewToDo(),
         },
         initialRoute: '/',
       ),

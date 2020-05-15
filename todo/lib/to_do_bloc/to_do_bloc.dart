@@ -16,24 +16,34 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   {
     add(AddToDoEvent(toDoObject));
   }
-   getByID(String id)
+  ToDoModel getByID(String id)
   {
     return state.todoList.firstWhere((object)=> id==object.id);
   
+  }
+  void toggleCompletion(String id)
+  {
+      getByID(id).isCompleted=!getByID(id).isCompleted;
+      add(GetToDoEvent());
   }
   @override
   Stream<ToDoState> mapEventToState(
     ToDoEvent event,
   ) async* {
-    if(event is GetObjectWithID)
-    {
-      print('get object');
-      yield ToDoObjectState(event.toDoObject);
-      
-    }
-    else if(event is AddToDoEvent)
+ 
+     if(event is AddToDoEvent)
     {
       yield ToDoListState(state.todoList..insert(0,event.toDoObject),);
     }
+    else if(event is GetToDoEvent)
+    {
+      yield ToDoListState(state.todoList);
+    }
+  }
+
+  @override
+  Future<void> close() {
+    
+    return super.close();
   }
 }

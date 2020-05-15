@@ -15,14 +15,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
+          primaryColor: Colors.green,
         ),
         onGenerateRoute: RouteGenerator.generateRoute,
-        // routes: {
-        //   '/': (context) => HomePage(),
-        //   NewToDo.routeName:(context)=>NewToDo(),
-        //   DetailToDoView.routeName:(context)=>DetailToDoView();
-        // },
         initialRoute: '/',
       ),
     );

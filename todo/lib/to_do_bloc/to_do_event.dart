@@ -11,3 +11,8 @@ class AddToDoEvent extends ToDoEvent{
   final toDoObject;
   AddToDoEvent(this.toDoObject);
 }
+
+class GetObjectWithID extends ToDoEvent{
+  final toDoObject;
+  GetObjectWithID(this.toDoObject);
+}

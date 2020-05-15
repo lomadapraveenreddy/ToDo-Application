@@ -20,3 +20,9 @@ class ToDoListState extends ToDoState{
   final todoList;
   ToDoListState(this.todoList);
 }
+
+class ToDoObjectState extends ToDoState{
+  @override
+  final todoList;
+  ToDoObjectState(this.todoList);
+}

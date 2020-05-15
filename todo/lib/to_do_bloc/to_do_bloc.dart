@@ -16,14 +16,20 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   {
     add(AddToDoEvent(toDoObject));
   }
-
+   getByID(String id)
+  {
+    return state.todoList.firstWhere((object)=> id==object.id);
+  
+  }
   @override
   Stream<ToDoState> mapEventToState(
     ToDoEvent event,
   ) async* {
-    if(event is GetToDoEvent)
+    if(event is GetObjectWithID)
     {
-      yield state;
+      print('get object');
+      yield ToDoObjectState(event.toDoObject);
+      
     }
     else if(event is AddToDoEvent)
     {

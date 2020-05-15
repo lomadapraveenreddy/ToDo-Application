@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import './route_generator.dart';
 import './to_do_bloc/to_do_bloc.dart';
-import './routes/all_routes.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -16,10 +17,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        routes: {
-          '/': (context) => HomePage(),
-          NewToDo.routeName:(context)=>NewToDo(),
-        },
+        onGenerateRoute: RouteGenerator.generateRoute,
+        // routes: {
+        //   '/': (context) => HomePage(),
+        //   NewToDo.routeName:(context)=>NewToDo(),
+        //   DetailToDoView.routeName:(context)=>DetailToDoView();
+        // },
         initialRoute: '/',
       ),
     );

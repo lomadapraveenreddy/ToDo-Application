@@ -1,5 +1,5 @@
 class ToDoModel{
-  final String id;
+  String id=DateTime.now().toString();
   bool isCompleted=false;
   String title;
   String description;

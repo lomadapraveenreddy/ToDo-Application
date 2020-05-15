@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/models/todo.dart';
-
-import '../bloc/to_do_list_bloc/to_do_list_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:todo/models/todo.dart';
+import '../bloc/to_do_list_bloc/to_do_list_bloc.dart';
 
-//This Route helps us to add a to do.....
-class NewToDo extends StatefulWidget {
-  static String routeName = '/newToDo';
+class EditRoute extends StatefulWidget {
+  static final routeName = '/EditToDo';
+  final ToDoModel object;
+  
+  EditRoute(this.object);
 
   @override
-  _NewToDoState createState() => _NewToDoState();
+  _EditRouteState createState() => _EditRouteState();
 }
 
-class _NewToDoState extends State<NewToDo> {
+class _EditRouteState extends State<EditRoute> {
+  int flag=0;
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   DateTime _selectedDate;
-  void addEventIfPossible() {
+  void _editFunction() {
+    print('edit func');
     String title = titleController.text;
     String description = descriptionController.text;
     if (title != null && _selectedDate != null) {
+      BlocProvider.of<ToDoListBloc>(context)
+          .editToDo(widget.object.id, title, description, _selectedDate);
       Navigator.of(context).pop();
-      BlocProvider.of<ToDoListBloc>(context).newToDo(ToDoModel(
-        id: DateTime.now().toString(),
-        title: title,
-        description: description,
-        deadline: _selectedDate,
-      ));
     }
   }
 
@@ -49,29 +48,29 @@ class _NewToDoState extends State<NewToDo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    if (flag == 0) {
+      _selectedDate = widget.object.deadline;
+      titleController.text = widget.object.title;
+      descriptionController.text = widget.object.description;
+      flag = 1;
+    }
+    return SafeArea(
+        child: Scaffold(
       appBar: AppBar(
-        title: Text('Have Some Work?'),
+        title: Text('Edit'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 25,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
         child: Column(
           children: <Widget>[
-            TextField(
+            TextFormField(
               controller: titleController,
-              onSubmitted: (_) => addEventIfPossible(),
-              decoration: InputDecoration(
-                hintText: 'Title',
-              ),
+
+              //initialValue: widget.object.title,
             ),
-            TextField(
+            TextFormField(
               controller: descriptionController,
-              onSubmitted: (_) => addEventIfPossible(),
-              decoration: InputDecoration(
-                hintText: 'Description',
-              ),
+              //initialValue: widget.object.description,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,13 +98,13 @@ class _NewToDoState extends State<NewToDo> {
             Align(
               alignment: Alignment.centerRight,
               child: FlatButton(
-                onPressed: addEventIfPossible,
+                onPressed: _editFunction,
                 child: Text('Submit'),
               ),
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }

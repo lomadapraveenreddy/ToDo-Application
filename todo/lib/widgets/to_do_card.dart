@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:todo/routes/all_routes.dart';
 
 import '../models/todo.dart';
-import '../to_do_bloc/to_do_bloc.dart';
+import '../bloc/to_do_list_bloc/to_do_list_bloc.dart';
 
 //This widget returns a card that takes ToDo object as argument
 class ToDoCard extends StatelessWidget {
@@ -13,10 +13,53 @@ class ToDoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onHorizontalDragEnd: (_) {
-        BlocProvider.of<ToDoBloc>(context).toggleCompletion(object.id);
-      },
+    void _showDialog() {
+      // flutter defined function
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text("Confirm Deletion"),
+            content: new Text("Are You Sure?"),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+              FlatButton(
+                child: new Text("Cancel"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: new Text("Delete"),
+                onPressed: () {
+                 BlocProvider.of<ToDoListBloc>(context).deleteToDo(object.id);
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+    return Dismissible(
+      key: ValueKey(object.id),
+      direction: DismissDirection.startToEnd,
+      onDismissed:(_)=> _showDialog(),
+      background: Container(
+        color: Colors.red,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
         child: Padding(
@@ -35,19 +78,20 @@ class ToDoCard extends StatelessWidget {
                       object.isCompleted ? Icons.done : Icons.remove,
                     ),
                     onPressed: () {
-                      BlocProvider.of<ToDoBloc>(context)
+                      BlocProvider.of<ToDoListBloc>(context)
                           .toggleCompletion(object.id);
                     }),
               ),
               SizedBox(
                 width: 20,
               ),
-              Container(
+              Flexible(
+                flex: 1,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(DetailToDoView.routeName,
-                        arguments: object.id);
-                    BlocProvider.of<ToDoBloc>(context).getByID(object.id);
+                    Navigator.of(context)
+                        .pushNamed(DetailRoute.routeName, arguments: object.id);
+                    BlocProvider.of<ToDoListBloc>(context).getByID(object.id);
                   },
                   child: Column(
                     children: <Widget>[

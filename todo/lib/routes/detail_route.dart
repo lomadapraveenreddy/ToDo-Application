@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/routes/all_routes.dart';
 
-import '../bloc/to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_list_bloc/to_do_list_bloc.dart';
 import '../models/todo.dart';
 
 class DetailRoute extends StatelessWidget {
@@ -13,7 +13,6 @@ class DetailRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ToDoModel toDoObject = BlocProvider.of<ToDoListBloc>(context).getByID(id);
     void _showDialog() {
       // flutter defined function
       showDialog(
@@ -48,10 +47,12 @@ class DetailRoute extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<ToDoListBloc>(context),
       builder: (context, state) {
+        ToDoModel object = BlocProvider.of<ToDoListBloc>(context).getByID(id);
+        print('bloc builder detail');
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              title: Text(toDoObject.title),
+              title: Text(object.title),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.delete), onPressed: _showDialog),
               ],
@@ -62,9 +63,9 @@ class DetailRoute extends StatelessWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  Text(toDoObject.title),
-                  Text(toDoObject.description),
-                  Text(DateFormat.yMMMd().format(toDoObject.deadline)),
+                  Text(object.title),
+                  if(object.description!=null)Text(object.description),
+                  if(object.deadline!=null)Text(DateFormat.yMMMd().format(object.deadline)),
                   Flexible(
                     flex: 20,
                     child: Align(
@@ -74,7 +75,7 @@ class DetailRoute extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             EditRoute.routeName,
-                            arguments: toDoObject,
+                            arguments: object,
                           );
                         },
                       ),

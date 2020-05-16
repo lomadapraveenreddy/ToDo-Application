@@ -12,4 +12,10 @@ class AddToDoEvent extends ToDoListEvent{
   AddToDoEvent(this.toDoObject);
 }
 
-class EditToDoEvent extends ToDoListEvent{}
+//class EditToDoEvent extends ToDoListEvent{}
+
+class ShowAllEvent extends ToDoListEvent{}
+
+class ShowCompletedEvent extends ToDoListEvent{}
+
+class ShowActiveEvent extends ToDoListEvent{}

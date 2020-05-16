@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/models/todo.dart';
-import '../bloc/to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_list_bloc/to_do_list_bloc.dart';
 
 class EditRoute extends StatefulWidget {
   static final routeName = '/EditToDo';
@@ -23,7 +23,7 @@ class _EditRouteState extends State<EditRoute> {
     print('edit func');
     String title = titleController.text;
     String description = descriptionController.text;
-    if (title != null && _selectedDate != null) {
+    if (title != null) {
       BlocProvider.of<ToDoListBloc>(context)
           .editToDo(widget.object.id, title, description, _selectedDate);
       Navigator.of(context).pop();

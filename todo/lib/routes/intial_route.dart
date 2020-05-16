@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
+import '../widgets/my_drawer.dart';
 import '../routes/all_routes.dart';
 import '../widgets/to_do_card.dart';
-import '../bloc/to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_list_bloc/to_do_list_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Hive.openBox('todoBox');
     return Scaffold(
       appBar: AppBar(
         title: Text('To Do'),
@@ -23,6 +26,7 @@ class HomePage extends StatelessWidget {
               }),
         ],
       ),
+      drawer: MyDrawer(),
       body: BlocBuilder<ToDoListBloc, ToDoListState>(
           bloc: BlocProvider.of(context),
           builder: (BuildContext context, ToDoListState state) {
@@ -32,13 +36,13 @@ class HomePage extends StatelessWidget {
               },
               itemCount: state.todoList.length,
             );
-          }),
+            }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => Navigator.of(context).pushNamed(
           NewToDo.routeName,
         ),
-      ),
+    )
     );
-  }
+}
 }

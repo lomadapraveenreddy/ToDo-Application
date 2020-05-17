@@ -2,18 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/routes/all_routes.dart';
+import '../widgets/my_fab.dart';
 
-import '../to_do_bloc/to_do_bloc.dart';
+import '../bloc/to_do_bloc/to_do_bloc.dart';
 import '../models/todo.dart';
 
 class DetailRoute extends StatelessWidget {
   static final routeName = '/DetailView';
   final String id;
   DetailRoute(this.id);
+  Widget _buildDivider() {
+    return Divider(
+      color: Colors.black45,
+    );
+  }
+
+  Widget _buildItem(title, text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(children: <Widget>[
+        // SizedBox(
+        //   height: 10,
+        // ),
+        _buildDivider(),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 24),
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+        _buildDivider(),
+      ]),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    
     void _showDialog() {
       // flutter defined function
       showDialog(
@@ -62,97 +100,31 @@ class DetailRoute extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Divider(
-                    color: Colors.black45,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Title',
-                      style: TextStyle(fontSize: 24),
+              child: Column(children: <Widget>[
+                _buildItem('Title', object.title),
+                if (object.description.isNotEmpty)
+                  _buildItem('Description', object.description),
+                _buildItem('Finish this before...',
+                    DateFormat.yMMMd().format(object.deadline)),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text(
-                        object.title,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    color: Colors.black45,
-                  ),
-                  
-                  object.description.isNotEmpty
-                      ? Container(
-                          child: Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Divider(
-                                color: Colors.black45,
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Description',
-                                  style: TextStyle(fontSize: 24),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    object.description,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      : SizedBox(),
-                  if (object.deadline != null)
-                    Text(DateFormat.yMMMd().format(object.deadline)),
-                  Flexible(
-                    flex: 20,
                     child: Align(
                       alignment: Alignment.bottomRight,
-                      child: FloatingActionButton(
-                        child: Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            EditRoute.routeName,
-                            arguments: object,
-                          );
-                        },
-                      ),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              EditRoute.routeName,
+                              arguments: object,
+                            );
+                          },
+                          child: MyFAB(Icons.edit)),
                     ),
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: SizedBox(
-                      height: 1,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ]),
             ),
           ),
         );

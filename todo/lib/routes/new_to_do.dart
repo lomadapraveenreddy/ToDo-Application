@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/models/todo.dart';
 
-import '../to_do_bloc/to_do_bloc.dart';
+import '../bloc/to_do_bloc/to_do_bloc.dart';
 import 'package:intl/intl.dart';
 
 //This Route helps us to add a to do.....
@@ -20,8 +20,7 @@ class _NewToDoState extends State<NewToDo> {
   void addEventIfPossible() {
     String title = titleController.text;
     String description = descriptionController.text;
-    if (title.isNotEmpty) {
-      print('title not null');
+    if (title.isNotEmpty && _selectedDate.difference(DateTime.now()).inDays>=0) {
       Navigator.of(context).pop();
       BlocProvider.of<ToDoBloc>(context).newToDo(ToDoModel(
         id: DateTime.now().toString(),
@@ -70,6 +69,8 @@ class _NewToDoState extends State<NewToDo> {
             TextField(
               controller: descriptionController,
               onSubmitted: (_) => addEventIfPossible(),
+              keyboardType: TextInputType.multiline,
+              maxLines: 5,
               decoration: InputDecoration(
                 hintText: 'Description',
               ),
@@ -86,6 +87,7 @@ class _NewToDoState extends State<NewToDo> {
                 Container(
                   margin: EdgeInsets.only(top: 8),
                   child: FlatButton(
+                    color: Theme.of(context).primaryColor,
                     child: Text(
                       'Choose Date',
                       style: TextStyle(
@@ -100,6 +102,7 @@ class _NewToDoState extends State<NewToDo> {
             Align(
               alignment: Alignment.centerRight,
               child: FlatButton(
+                color: Theme.of(context).primaryColor,
                 onPressed: addEventIfPossible,
                 child: Text('Submit'),
               ),

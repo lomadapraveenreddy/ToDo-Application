@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/models/todo.dart';
-import '../to_do_bloc/to_do_bloc.dart';
+import '../bloc/to_do_bloc/to_do_bloc.dart';
 
 class EditRoute extends StatefulWidget {
   static final routeName = '/EditToDo';
   final ToDoModel object;
-  
+
   EditRoute(this.object);
 
   @override
@@ -15,7 +15,7 @@ class EditRoute extends StatefulWidget {
 }
 
 class _EditRouteState extends State<EditRoute> {
-  int flag=0;
+  int flag = 0;
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   DateTime _selectedDate;
@@ -65,12 +65,15 @@ class _EditRouteState extends State<EditRoute> {
           children: <Widget>[
             TextFormField(
               controller: titleController,
-
-              //initialValue: widget.object.title,
             ),
             TextFormField(
               controller: descriptionController,
-              //initialValue: widget.object.description,
+              keyboardType: TextInputType.multiline,
+              maxLines: 5,
+              decoration: InputDecoration(
+                hintText:
+                    descriptionController.text.isEmpty ? 'Description' : null,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

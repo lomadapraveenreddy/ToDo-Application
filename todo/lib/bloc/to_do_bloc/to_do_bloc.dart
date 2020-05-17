@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:hive/hive.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../models/todo.dart';
+import '../../models/todo.dart';
 
 part 'to_do_event.dart';
 part 'to_do_state.dart';
@@ -11,7 +11,7 @@ part 'to_do_state.dart';
 class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   final _todoBox = Hive.box('todoBox');
   @override
-  ToDoState get initialState => ToDoInitial();
+  ToDoState get initialState => ToDoInitial(_todoBox.values.toList());
 
   void newToDo(toDoObject) {
     add(AddToDoEvent(toDoObject));
@@ -27,7 +27,7 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     print('index $index');
     list[index].isCompleted = !list[index].isCompleted;
     _todoBox.putAt(index, list[index]);
-    add(GetToDoEvent());
+    add(YieldStateEvent());
   }
 
   void editToDo(
@@ -43,27 +43,15 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     add(DeleteToDoEvent(id));
   }
 
-  void showAllToDo() {
-    add(GetToDoEvent());
-  }
-
-  void showCompleted() {
-    add(ShowCompletedEvent());
-  }
-
-  void showActive() {
-    add(ShowActiveEvent());
-  }
-
   @override
   Stream<ToDoState> mapEventToState(
     ToDoEvent event,
   ) async* {
     if (event is AddToDoEvent) {
       _todoBox.add(event.toDoObject);
-      yield ToDoState();
+      yield ToDoState(todoList: _todoBox.values.toList());
     } else if (event is GetToDoEvent) {
-      yield ToDoState();
+      yield ToDoState(todoList: _todoBox.values.toList());
     } else if (event is EditToDoEvent) {
       int index = _todoBox.values
           .toList()
@@ -75,14 +63,14 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
         deadline: event.selectedDate,
       );
       _todoBox.putAt(index, object);
-      yield ToDoState();
+      yield ToDoState(todoList: _todoBox.values.toList());
     } else if (event is DeleteToDoEvent) {
       _todoBox.deleteAt(_todoBox.values
           .toList()
           .indexWhere((element) => event.id == element.id));
-      yield ToDoState();
+      yield ToDoState(todoList: _todoBox.values.toList());
     } else if (event is ShowAllEvent) {
-      yield ToDoState();
+      yield ToDoState(todoList: _todoBox.values.toList());
     } else if (event is ShowCompletedEvent) {
       print('completed');
       List list = _todoBox.values.toList();
@@ -93,6 +81,16 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
       List list = _todoBox.values.toList();
       list = list.where((e) => !e.isCompleted).toList();
       yield ToDoState(todoList: list);
+    } else if (event is ShowOnSelectedDateEvent) {
+      List list = _todoBox.values.toList();
+      list = list.where((e) {
+        return event.date.day == e.deadline.day &&
+            event.date.month == e.deadline.month &&
+            event.date.year == e.deadline.year;
+      }).toList();
+      yield ToDoState(todoList: list);
+    } else if (event is YieldStateEvent) {
+      yield ToDoState(todoList: state.todoList);
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:todo/routes/all_routes.dart';
 
 import '../models/todo.dart';
-import '../to_do_bloc/to_do_bloc.dart';
+import '../bloc/to_do_bloc/to_do_bloc.dart';
 
 //This widget returns a card that takes ToDo object as argument
 class ToDoCard extends StatelessWidget {
@@ -68,16 +68,28 @@ class ToDoCard extends StatelessWidget {
                       ? Theme.of(context).primaryColor
                       : Colors.white,
                 ),
-                child: IconButton(
-                    icon: Icon(
-                      object.isCompleted
-                          ? Icons.done_outline
-                          : Icons.done_outline,
-                    ),
-                    onPressed: () {
-                      BlocProvider.of<ToDoBloc>(context)
-                          .toggleCompletion(object.id);
-                    }),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: object.isCompleted
+                        ? null
+                        : Border.all(color: Colors.black),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                      icon: object.isCompleted
+                          ? Icon(
+                              Icons.done_outline,
+                              color: Colors.white,
+                            )
+                          : Icon(
+                              Icons.stop,
+                              color: Colors.black,
+                            ), //IconData(0xe870, fontFamily: _kFontFam, fontPackage: _kFontPkg)
+                      onPressed: () {
+                        BlocProvider.of<ToDoBloc>(context)
+                            .toggleCompletion(object.id);
+                      }),
+                ),
               ),
               SizedBox(
                 width: 20,
@@ -97,7 +109,6 @@ class ToDoCard extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ),
-                      Text(object.description),
                       object.deadline != null
                           ? Text(
                               DateFormat.yMMMd().format(object.deadline),

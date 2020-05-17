@@ -30,3 +30,10 @@ class ShowAllEvent extends ToDoEvent{}
 class ShowCompletedEvent extends ToDoEvent{}
 
 class ShowActiveEvent extends ToDoEvent{}
+
+class YieldStateEvent extends ToDoEvent{}
+
+class ShowOnSelectedDateEvent extends ToDoEvent{
+  final date;
+  ShowOnSelectedDateEvent(this.date);
+}

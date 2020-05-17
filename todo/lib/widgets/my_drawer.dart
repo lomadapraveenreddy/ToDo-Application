@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../to_do_bloc/to_do_bloc.dart';
+import '../bloc/to_do_bloc/to_do_bloc.dart';
+import '../bloc/theme_bloc/theme_bloc.dart';
 
 class MyDrawer extends StatelessWidget {
   List<Widget> drawerItemWidgets(context) {
@@ -22,9 +23,11 @@ class MyDrawer extends StatelessWidget {
               SizedBox(
                 width: 40,
               ),
-              Text(
-                item['text'],
-                style: TextStyle(fontSize: 20),
+              Expanded(
+                child: Text(
+                  item['text'],
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ],
           ),
@@ -36,8 +39,9 @@ class MyDrawer extends StatelessWidget {
   final drawerItems = [
     {
       'action': ShowAllEvent(),
-      'icon': Icon(Icons.work),
+      'icon': Icon(Icons.done_all),
       'text': 'All',
+      'bloc': ToDoBloc,
     },
     {
       'action': ShowActiveEvent(),
@@ -70,6 +74,36 @@ class MyDrawer extends StatelessWidget {
           ),
         ),
         ...drawerItemWidgets(context),
+        GestureDetector(
+        onTap: () {
+           Navigator.of(context).pop();
+          BlocProvider.of<ThemeBloc>(context).add(ChangeThemeEvent());
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                width: 40,
+              ),
+              //Icon(Icons.check_box_outline_blank),
+              Icon(Icons.color_lens),
+              SizedBox(
+                width: 40,
+              ),
+              Expanded(
+                child: BlocBuilder<ThemeBloc,ThemeState>(builder: (context,state){
+                      return Text(
+                   state.themetype==0?'Light Theme':'Dark Theme',
+                  style: TextStyle(fontSize: 20),
+                );
+                })
+                
+              ),
+            ],
+          ),
+        ),
+      )
       ],
     ));
   }

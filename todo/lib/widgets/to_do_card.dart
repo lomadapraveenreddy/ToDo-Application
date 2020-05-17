@@ -70,7 +70,9 @@ class ToDoCard extends StatelessWidget {
                 ),
                 child: IconButton(
                     icon: Icon(
-                      object.isCompleted ? Icons.done_outline : Icons.done_outline,
+                      object.isCompleted
+                          ? Icons.done_outline
+                          : Icons.done_outline,
                     ),
                     onPressed: () {
                       BlocProvider.of<ToDoListBloc>(context)
@@ -80,39 +82,36 @@ class ToDoCard extends StatelessWidget {
               SizedBox(
                 width: 20,
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(DetailRoute.routeName, arguments: object.id);
-                  BlocProvider.of<ToDoListBloc>(context).getByID(object.id);
-                },
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      object.title,
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    object.deadline != null
-                        ? Text(
-                            DateFormat.yMMMd().format(object.deadline),
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          )
-                        : Text(
-                            'No Deadline',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                  ],
-                ),
-              ),
               Expanded(
-                child: SizedBox(
-                  width: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(DetailRoute.routeName, arguments: object.id);
+                    BlocProvider.of<ToDoListBloc>(context).getByID(object.id);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        object.title,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      object.deadline != null
+                          ? Text(
+                              DateFormat.yMMMd().format(object.deadline),
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            )
+                          : Text(
+                              'No Deadline',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
               ),
               IconButton(

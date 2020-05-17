@@ -97,6 +97,7 @@ class ToDoCard extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ),
+                      Text(object.description),
                       object.deadline != null
                           ? Text(
                               DateFormat.yMMMd().format(object.deadline),

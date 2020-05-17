@@ -36,24 +36,11 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     String description,
     DateTime selectedDate,
   ) {
-    int index =
-        _todoBox.values.toList().indexWhere((object) => id == object.id);
-    print('index $index');
-    
-    var object = ToDoModel(
-      id: id,
-      title: title,
-      description: description,
-      deadline: selectedDate,
-    );
-    _todoBox.putAt(index, object);
-    add(GetToDoEvent());
+    add(EditToDoEvent(id, title, description, selectedDate));
   }
 
   void deleteToDo(String id) {
-    _todoBox.deleteAt(
-        _todoBox.values.toList().indexWhere((element) => id == element.id));
-    add(GetToDoEvent());
+    add(DeleteToDoEvent(id));
   }
 
   void showAllToDo() {
@@ -74,22 +61,38 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   ) async* {
     if (event is AddToDoEvent) {
       _todoBox.add(event.toDoObject);
-      yield ToDoState(_todoBox.values.toList());
+      yield ToDoState();
     } else if (event is GetToDoEvent) {
-      yield ToDoState(Hive.box('todoBox').values.toList());
+      yield ToDoState();
+    } else if (event is EditToDoEvent) {
+      int index = _todoBox.values
+          .toList()
+          .indexWhere((object) => event.id == object.id);
+      var object = ToDoModel(
+        id: event.id,
+        title: event.title,
+        description: event.description,
+        deadline: event.selectedDate,
+      );
+      _todoBox.putAt(index, object);
+      yield ToDoState();
+    } else if (event is DeleteToDoEvent) {
+      _todoBox.deleteAt(_todoBox.values
+          .toList()
+          .indexWhere((element) => event.id == element.id));
+      yield ToDoState();
     } else if (event is ShowAllEvent) {
-      yield ToDoState(_todoBox.values.toList());
+      yield ToDoState();
     } else if (event is ShowCompletedEvent) {
       print('completed');
       List list = _todoBox.values.toList();
       list = list.where((e) => e.isCompleted).toList();
-      yield ToDoState(list);
-      
+      yield ToDoState(todoList: list);
     } else if (event is ShowActiveEvent) {
       print('Active');
       List list = _todoBox.values.toList();
       list = list.where((e) => !e.isCompleted).toList();
-      yield ToDoState(list);
+      yield ToDoState(todoList: list);
     }
   }
 }

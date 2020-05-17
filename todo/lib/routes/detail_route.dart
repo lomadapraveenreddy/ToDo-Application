@@ -13,6 +13,7 @@ class DetailRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     void _showDialog() {
       // flutter defined function
       showDialog(
@@ -63,9 +64,72 @@ class DetailRoute extends StatelessWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  Text(object.title),
-                  if(object.description!=null)Text(object.description),
-                  if(object.deadline!=null)Text(DateFormat.yMMMd().format(object.deadline)),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    color: Colors.black45,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Title',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        object.title,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.black45,
+                  ),
+                  
+                  object.description.isNotEmpty
+                      ? Container(
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Divider(
+                                color: Colors.black45,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Description',
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    object.description,
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
+                  if (object.deadline != null)
+                    Text(DateFormat.yMMMd().format(object.deadline)),
                   Flexible(
                     flex: 20,
                     child: Align(

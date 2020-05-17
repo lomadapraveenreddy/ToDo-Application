@@ -14,35 +14,34 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Hive.openBox('todoBox');
     return Scaffold(
-      appBar: AppBar(
-        title: Text('To Do'),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.of(context).pushNamed(
-                  NewToDo.routeName,
-                );
-              }),
-        ],
-      ),
-      drawer: MyDrawer(),
-      body: BlocBuilder<ToDoBloc, ToDoState>(
-          bloc: BlocProvider.of(context),
-          builder: (BuildContext context, ToDoState state) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                return ToDoCard(state.todoList[index]);
-              },
-              itemCount: state.todoList.length,
-            );
-            }),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => Navigator.of(context).pushNamed(
-          NewToDo.routeName,
+        appBar: AppBar(
+          title: Text('To Do'),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    NewToDo.routeName,
+                  );
+                }),
+          ],
         ),
-    )
-    );
-}
+        drawer: MyDrawer(),
+        body: BlocBuilder<ToDoBloc, ToDoState>(
+            bloc: BlocProvider.of(context),
+            builder: (BuildContext context, ToDoState state) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  return ToDoCard(state.todoList[index]);
+                },
+                itemCount: state.todoList.length,
+              );
+            }),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => Navigator.of(context).pushNamed(
+            NewToDo.routeName,
+          ),
+        ));
+  }
 }

@@ -12,7 +12,18 @@ class AddToDoEvent extends ToDoEvent{
   AddToDoEvent(this.toDoObject);
 }
 
-//class EditToDoEvent extends ToDoEvent{}
+class EditToDoEvent extends ToDoEvent{
+  final   String id;
+  final   String title;
+  final   String description;
+  final   DateTime selectedDate;
+  EditToDoEvent(this.id,this.title,this.description,this.selectedDate);
+}
+
+class DeleteToDoEvent extends ToDoEvent{
+  final String id;
+  DeleteToDoEvent(this.id);
+}
 
 class ShowAllEvent extends ToDoEvent{}
 

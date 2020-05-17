@@ -2,8 +2,8 @@ part of 'to_do_bloc.dart';
 
 
 class ToDoState {
-  List<dynamic>todoList;
-  ToDoState(this.todoList);
+  List<dynamic>todoList=Hive.box('todoBox').values.toList();
+  ToDoState({this.todoList});
 }
 
 
@@ -14,6 +14,6 @@ List<dynamic> get getToDoObjectsFromBox {
 }
 
 class ToDoInitial extends ToDoState {
-  ToDoInitial():super(getToDoObjectsFromBox);
+  ToDoInitial():super(todoList:getToDoObjectsFromBox);
 }
 

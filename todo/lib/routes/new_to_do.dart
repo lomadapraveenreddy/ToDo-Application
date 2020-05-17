@@ -20,7 +20,8 @@ class _NewToDoState extends State<NewToDo> {
   void addEventIfPossible() {
     String title = titleController.text;
     String description = descriptionController.text;
-    if (title != null) {
+    if (title.isNotEmpty) {
+      print('title not null');
       Navigator.of(context).pop();
       BlocProvider.of<ToDoBloc>(context).newToDo(ToDoModel(
         id: DateTime.now().toString(),

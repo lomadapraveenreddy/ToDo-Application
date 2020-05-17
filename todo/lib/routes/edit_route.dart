@@ -23,7 +23,7 @@ class _EditRouteState extends State<EditRoute> {
     print('edit func');
     String title = titleController.text;
     String description = descriptionController.text;
-    if (title != null) {
+    if (title.isNotEmpty) {
       BlocProvider.of<ToDoBloc>(context)
           .editToDo(widget.object.id, title, description, _selectedDate);
       Navigator.of(context).pop();

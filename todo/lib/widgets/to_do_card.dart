@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:todo/routes/all_routes.dart';
 
 import '../models/todo.dart';
-import '../to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_bloc/to_do_bloc.dart';
 
 //This widget returns a card that takes ToDo object as argument
 class ToDoCard extends StatelessWidget {
@@ -33,7 +33,7 @@ class ToDoCard extends StatelessWidget {
       key: ValueKey(object.id),
       direction: DismissDirection.startToEnd,
       onDismissed: (_) =>
-          BlocProvider.of<ToDoListBloc>(context).deleteToDo(object.id),
+          BlocProvider.of<ToDoBloc>(context).deleteToDo(object.id),
       confirmDismiss: (DismissDirection direction) async {
         return await showDialog(
           context: context,
@@ -75,7 +75,7 @@ class ToDoCard extends StatelessWidget {
                           : Icons.done_outline,
                     ),
                     onPressed: () {
-                      BlocProvider.of<ToDoListBloc>(context)
+                      BlocProvider.of<ToDoBloc>(context)
                           .toggleCompletion(object.id);
                     }),
               ),
@@ -87,7 +87,7 @@ class ToDoCard extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context)
                         .pushNamed(DetailRoute.routeName, arguments: object.id);
-                    BlocProvider.of<ToDoListBloc>(context).getByID(object.id);
+                    BlocProvider.of<ToDoBloc>(context).getByID(object.id);
                   },
                   child: Column(
                     children: <Widget>[

@@ -1,18 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import '../models/todo.dart';
 
-part 'to_do_list_event.dart';
-part 'to_do_list_state.dart';
+part 'to_do_event.dart';
+part 'to_do_state.dart';
 
-class ToDoListBloc extends Bloc<ToDoListEvent, ToDoListState> {
+class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   final _todoBox = Hive.box('todoBox');
   @override
-  ToDoListState get initialState => ToDoListInitial();
+  ToDoState get initialState => ToDoInitial();
 
   void newToDo(toDoObject) {
     add(AddToDoEvent(toDoObject));
@@ -70,27 +69,27 @@ class ToDoListBloc extends Bloc<ToDoListEvent, ToDoListState> {
   }
 
   @override
-  Stream<ToDoListState> mapEventToState(
-    ToDoListEvent event,
+  Stream<ToDoState> mapEventToState(
+    ToDoEvent event,
   ) async* {
     if (event is AddToDoEvent) {
       _todoBox.add(event.toDoObject);
-      yield ToDoListState(_todoBox.values.toList());
+      yield ToDoState(_todoBox.values.toList());
     } else if (event is GetToDoEvent) {
-      yield ToDoListState(Hive.box('todoBox').values.toList());
+      yield ToDoState(Hive.box('todoBox').values.toList());
     } else if (event is ShowAllEvent) {
-      yield ToDoListState(_todoBox.values.toList());
+      yield ToDoState(_todoBox.values.toList());
     } else if (event is ShowCompletedEvent) {
       print('completed');
       List list = _todoBox.values.toList();
       list = list.where((e) => e.isCompleted).toList();
-      yield ToDoListState(list);
+      yield ToDoState(list);
       
     } else if (event is ShowActiveEvent) {
       print('Active');
       List list = _todoBox.values.toList();
       list = list.where((e) => !e.isCompleted).toList();
-      yield ToDoListState(list);
+      yield ToDoState(list);
     }
   }
 }

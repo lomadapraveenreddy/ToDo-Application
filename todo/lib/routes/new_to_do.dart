@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/models/todo.dart';
 
-import '../to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_bloc/to_do_bloc.dart';
 import 'package:intl/intl.dart';
 
 //This Route helps us to add a to do.....
@@ -22,7 +22,7 @@ class _NewToDoState extends State<NewToDo> {
     String description = descriptionController.text;
     if (title != null) {
       Navigator.of(context).pop();
-      BlocProvider.of<ToDoListBloc>(context).newToDo(ToDoModel(
+      BlocProvider.of<ToDoBloc>(context).newToDo(ToDoModel(
         id: DateTime.now().toString(),
         title: title,
         description: description,

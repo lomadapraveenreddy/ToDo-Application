@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:hive/hive.dart';
-import './to_do_list_bloc/to_do_list_bloc.dart';
+import './to_do_bloc/to_do_bloc.dart';
 import './route_generator.dart';
 import './models/todo.dart';
 
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ToDoListBloc>(
-          create: (_) => ToDoListBloc(),
+        BlocProvider<ToDoBloc>(
+          create: (_) => ToDoBloc(),
         ),
         //BlocProvider<ToDoBloc>(create:(_)=>ToDoBloc(),),
       ],

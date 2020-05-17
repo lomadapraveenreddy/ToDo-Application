@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/routes/all_routes.dart';
 
-import '../to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_bloc/to_do_bloc.dart';
 import '../models/todo.dart';
 
 class DetailRoute extends StatelessWidget {
@@ -33,7 +33,7 @@ class DetailRoute extends StatelessWidget {
               FlatButton(
                 child: new Text("Delete"),
                 onPressed: () {
-                  BlocProvider.of<ToDoListBloc>(context).deleteToDo(id);
+                  BlocProvider.of<ToDoBloc>(context).deleteToDo(id);
                   Navigator.of(context).pop();
                   Navigator.of(context).pop();
                 },
@@ -45,9 +45,9 @@ class DetailRoute extends StatelessWidget {
     }
 
     return BlocBuilder(
-      bloc: BlocProvider.of<ToDoListBloc>(context),
+      bloc: BlocProvider.of<ToDoBloc>(context),
       builder: (context, state) {
-        ToDoModel object = BlocProvider.of<ToDoListBloc>(context).getByID(id);
+        ToDoModel object = BlocProvider.of<ToDoBloc>(context).getByID(id);
         print('bloc builder detail');
         return SafeArea(
           child: Scaffold(

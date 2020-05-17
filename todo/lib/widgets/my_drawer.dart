@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_bloc/to_do_bloc.dart';
 
 class MyDrawer extends StatelessWidget {
   List<Widget> drawerItemWidgets(context) {
     return drawerItems.map((item) {
       return GestureDetector(
         onTap: () {
-          BlocProvider.of<ToDoListBloc>(context).add(item['action']);
+          BlocProvider.of<ToDoBloc>(context).add(item['action']);
           Navigator.of(context).pop();
         },
         child: Container(

@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import '../widgets/my_drawer.dart';
 import '../routes/all_routes.dart';
 import '../widgets/to_do_card.dart';
-import '../to_do_list_bloc/to_do_list_bloc.dart';
+import '../to_do_bloc/to_do_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -27,9 +27,9 @@ class HomePage extends StatelessWidget {
         ],
       ),
       drawer: MyDrawer(),
-      body: BlocBuilder<ToDoListBloc, ToDoListState>(
+      body: BlocBuilder<ToDoBloc, ToDoState>(
           bloc: BlocProvider.of(context),
-          builder: (BuildContext context, ToDoListState state) {
+          builder: (BuildContext context, ToDoState state) {
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ToDoCard(state.todoList[index]);

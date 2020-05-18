@@ -15,7 +15,7 @@ class MyFAB extends StatelessWidget {
       ),
       child: Icon(
         icon,
-        color: Colors.white,
+        color:Theme.of(context).accentColor,
         size: 40,
       ),
     );

@@ -12,7 +12,8 @@ Map<THEMES,ThemeData>myThemes={
   ),
   THEMES.PRIMARYTHEME:ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.green,
+    primaryColor: Colors.teal,
+    accentColor: Colors.white,
     textTheme: TextTheme(
       headline1: TextStyle(
         fontSize: 22,

@@ -20,7 +20,7 @@ class _EditRouteState extends State<EditRoute> {
   final descriptionController = TextEditingController();
   DateTime _selectedDate;
   void _editFunction() {
-    print('edit func');
+     
     String title = titleController.text;
     String description = descriptionController.text;
     if (title.isNotEmpty) {
@@ -34,7 +34,7 @@ class _EditRouteState extends State<EditRoute> {
     showDatePicker(
             context: context,
             initialDate: DateTime.now().add(Duration(days: 1)),
-            firstDate: DateTime(2019),
+            firstDate: DateTime.now(),
             lastDate: DateTime.now().add(Duration(days: 365)))
         .then((pickedDate) {
       if (pickedDate == null) {

@@ -9,7 +9,7 @@ abstract class ThemeState {
 ThemeData get getTheme{
 final _box=Hive.box('theme');
       if(_box.isEmpty)
-      _box.add(1);
+      _box.add(0);
       int themeNumber=_box.getAt(0);
       var theme;
       switch (themeNumber) {
@@ -20,8 +20,8 @@ final _box=Hive.box('theme');
           theme=myThemes[THEMES.PRIMARYTHEME];
           break;
       }
-      print('initial theme');
-      print(theme);
+       
+       
       return theme;
 }
 int get getThemeType{

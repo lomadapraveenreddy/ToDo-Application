@@ -60,76 +60,78 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Hive.openBox('todoBox');
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'To Do',
-        ),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.calendar_today),
-              onPressed: () {
-                setState(() {
-                  _calendarView = !_calendarView;
-                  _calendarView
-                      ? BlocProvider.of<ToDoBloc>(context)
-                          .add(ShowOnSelectedDateEvent(DateTime.now()))
-                      : BlocProvider.of<ToDoBloc>(context).add(ShowAllEvent());
-                  print(_calendarView);
-                });
-              }),
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.of(context).pushNamed(
-                  NewToDo.routeName,
-                );
-              }),
-          SizedBox(
-            width: 15,
+    return SafeArea(
+          child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'To Do',
           ),
-        ],
-      ),
-      drawer: _calendarView ? null : MyDrawer(),
-      body: Container(
-          child: Column(
-            children: <Widget>[
-      _calendarView
-          ? TableCalendar(
-              calendarController: _calendarController,
-              initialSelectedDay: DateTime.now(),
-              onDaySelected: (date, _) {
-                BlocProvider.of<ToDoBloc>(context)
-                    .add(ShowOnSelectedDateEvent(date));
-              },
-              initialCalendarFormat: CalendarFormat.week,
-              headerStyle: HeaderStyle(
-                centerHeaderTitle: true,
-                formatButtonShowsNext: false,
-              ),
-              calendarStyle: CalendarStyle(
-                selectedColor: Theme.of(context).primaryColor,
-              ),
-            )
-          : SizedBox(),
-      Expanded(
-        child: Container(
-          child: BlocBuilder<ToDoBloc, ToDoState>(
-              bloc: BlocProvider.of(context),
-              builder: (BuildContext context, ToDoState state) {
-                return _buildToDoList(_calendarView, state);
-              }),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.calendar_today),
+                onPressed: () {
+                  setState(() {
+                    _calendarView = !_calendarView;
+                    _calendarView
+                        ? BlocProvider.of<ToDoBloc>(context)
+                            .add(ShowOnSelectedDateEvent(DateTime.now()))
+                        : BlocProvider.of<ToDoBloc>(context).add(ShowAllEvent());
+                     
+                  });
+                }),
+            IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    NewToDo.routeName,
+                  );
+                }),
+            SizedBox(
+              width: 15,
+            ),
+          ],
         ),
-      ),
-            ],
+        drawer: _calendarView ? null : MyDrawer(),
+        body: Container(
+            child: Column(
+              children: <Widget>[
+        _calendarView
+            ? TableCalendar(
+                calendarController: _calendarController,
+                initialSelectedDay: DateTime.now(),
+                onDaySelected: (date, _) {
+                  BlocProvider.of<ToDoBloc>(context)
+                      .add(ShowOnSelectedDateEvent(date));
+                },
+                initialCalendarFormat: CalendarFormat.week,
+                headerStyle: HeaderStyle(
+                  centerHeaderTitle: true,
+                  formatButtonShowsNext: false,
+                ),
+                calendarStyle: CalendarStyle(
+                  selectedColor: Theme.of(context).primaryColor,
+                ),
+              )
+            : SizedBox(),
+        Expanded(
+          child: Container(
+            child: BlocBuilder<ToDoBloc, ToDoState>(
+                bloc: BlocProvider.of(context),
+                builder: (BuildContext context, ToDoState state) {
+                  return _buildToDoList(_calendarView, state);
+                }),
           ),
         ),
-      floatingActionButton: GestureDetector(
-        onTap: () => Navigator.of(context).pushNamed(
-          NewToDo.routeName,
+              ],
+            ),
+          ),
+        floatingActionButton: GestureDetector(
+          onTap: () => Navigator.of(context).pushNamed(
+            NewToDo.routeName,
+          ),
+          child: MyFAB(Icons.add),
         ),
-        child: MyFAB(Icons.add),
       ),
     );
   }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:todo/models/todo.dart';
 
 import '../bloc/to_do_bloc/to_do_bloc.dart';
 import 'package:intl/intl.dart';
 
-//This Route helps us to add a to do.....
 class NewToDo extends StatefulWidget {
   static String routeName = '/newToDo';
 
@@ -20,14 +20,17 @@ class _NewToDoState extends State<NewToDo> {
   void addEventIfPossible() {
     String title = titleController.text;
     String description = descriptionController.text;
-    if (title.isNotEmpty && _selectedDate.difference(DateTime.now()).inDays>=0) {
+    if (title.isNotEmpty &&
+        _selectedDate.difference(DateTime.now()).inDays >= 0) {
       Navigator.of(context).pop();
-      BlocProvider.of<ToDoBloc>(context).newToDo(ToDoModel(
-        id: DateTime.now().toString(),
-        title: title,
-        description: description,
-        deadline: _selectedDate,
-      ));
+      BlocProvider.of<ToDoBloc>(context).newToDo(
+        ToDoModel(
+          id: DateTime.now().toString(),
+          title: title,
+          description: description,
+          deadline: _selectedDate,
+        ),
+      );
     }
   }
 
@@ -35,7 +38,7 @@ class _NewToDoState extends State<NewToDo> {
     showDatePicker(
             context: context,
             initialDate: DateTime.now().add(Duration(days: 1)),
-            firstDate: DateTime(2019),
+            firstDate: DateTime.now(),
             lastDate: DateTime.now().add(Duration(days: 365)))
         .then((pickedDate) {
       if (pickedDate == null) {

@@ -24,7 +24,7 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   void toggleCompletion(String id) {
     List<dynamic> list = _todoBox.values.toList();
     int index = list.indexWhere((element) => id == element.id);
-    print('index $index');
+
     list[index].isCompleted = !list[index].isCompleted;
     _todoBox.putAt(index, list[index]);
     add(YieldStateEvent());
@@ -72,12 +72,10 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     } else if (event is ShowAllEvent) {
       yield ToDoState(todoList: _todoBox.values.toList());
     } else if (event is ShowCompletedEvent) {
-      print('completed');
       List list = _todoBox.values.toList();
       list = list.where((e) => e.isCompleted).toList();
       yield ToDoState(todoList: list);
     } else if (event is ShowActiveEvent) {
-      print('Active');
       List list = _todoBox.values.toList();
       list = list.where((e) => !e.isCompleted).toList();
       yield ToDoState(todoList: list);

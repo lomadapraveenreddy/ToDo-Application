@@ -87,7 +87,7 @@ class DetailRoute extends StatelessWidget {
       bloc: BlocProvider.of<ToDoBloc>(context),
       builder: (context, state) {
         ToDoModel object = BlocProvider.of<ToDoBloc>(context).getByID(id);
-        print('bloc builder detail');
+         
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -101,27 +101,35 @@ class DetailRoute extends StatelessWidget {
                 horizontal: 20,
               ),
               child: Column(children: <Widget>[
-                _buildItem('Title', object.title),
+                _buildItem('Title:', object.title),
                 if (object.description.isNotEmpty)
-                  _buildItem('Description', object.description),
-                _buildItem('Finish this before...',
-                    DateFormat.yMMMd().format(object.deadline)),
+                  _buildItem('Description:', object.description),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 20,
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushNamed(
-                              EditRoute.routeName,
-                              arguments: object,
-                            );
-                          },
-                          child: MyFAB(Icons.edit)),
-                    ),
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('Created on...  '+
+                          DateFormat.yMMMd().format(DateTime.parse(object.id))),
+                      Text('Finish this before...' +
+                          DateFormat.yMMMd().format(object.deadline)),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 20,
+                  ),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            EditRoute.routeName,
+                            arguments: object,
+                          );
+                        },
+                        child: MyFAB(Icons.edit)),
                   ),
                 ),
               ]),

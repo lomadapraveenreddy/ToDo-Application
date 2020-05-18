@@ -68,7 +68,7 @@ class MyDrawer extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20),
               child: Text(
                 'ToDo List',
-                style: TextStyle(fontSize: 40, color: Colors.white),
+                style: TextStyle(fontSize: 40, color: Theme.of(context).accentColor),
               ),
             ),
           ),

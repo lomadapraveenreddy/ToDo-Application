@@ -66,7 +66,7 @@ class ToDoCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: object.isCompleted
                       ? Theme.of(context).primaryColor
-                      : Colors.white,
+                      : Theme.of(context).accentColor,
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -79,7 +79,7 @@ class ToDoCard extends StatelessWidget {
                       icon: object.isCompleted
                           ? Icon(
                               Icons.done_outline,
-                              color: Colors.white,
+                              color: Theme.of(context).accentColor,
                             )
                           : Icon(
                               Icons.stop,

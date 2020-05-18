@@ -87,7 +87,7 @@ class DetailRoute extends StatelessWidget {
       bloc: BlocProvider.of<ToDoBloc>(context),
       builder: (context, state) {
         ToDoModel object = BlocProvider.of<ToDoBloc>(context).getByID(id);
-         
+
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -109,10 +109,21 @@ class DetailRoute extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('Created on...  '+
-                          DateFormat.yMMMd().format(DateTime.parse(object.id))),
-                      Text('Finish this before...' +
-                          DateFormat.yMMMd().format(object.deadline)),
+                      Text(
+                        'Created on...  ' +
+                            DateFormat.yMMMd()
+                                .format(DateTime.parse(object.id)),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Finish this before...' +
+                            DateFormat.yMMMd().format(object.deadline),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        ),
                     ],
                   ),
                 ),

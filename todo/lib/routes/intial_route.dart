@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Hive.openBox('todoBox');
     return SafeArea(
-          child: Scaffold(
+      child: Scaffold(
         appBar: AppBar(
           title: Text(
             'To Do',
@@ -76,8 +76,8 @@ class _HomePageState extends State<HomePage> {
                     _calendarView
                         ? BlocProvider.of<ToDoBloc>(context)
                             .add(ShowOnSelectedDateEvent(DateTime.now()))
-                        : BlocProvider.of<ToDoBloc>(context).add(ShowAllEvent());
-                     
+                        : BlocProvider.of<ToDoBloc>(context)
+                            .add(ShowAllEvent());
                   });
                 }),
             IconButton(
@@ -94,43 +94,46 @@ class _HomePageState extends State<HomePage> {
         ),
         drawer: _calendarView ? null : MyDrawer(),
         body: Container(
-            child: Column(
-              children: <Widget>[
-        _calendarView
-            ? TableCalendar(
-                calendarController: _calendarController,
-                initialSelectedDay: DateTime.now(),
-                onDaySelected: (date, _) {
-                  BlocProvider.of<ToDoBloc>(context)
-                      .add(ShowOnSelectedDateEvent(date));
-                },
-                initialCalendarFormat: CalendarFormat.week,
-                headerStyle: HeaderStyle(
-                  centerHeaderTitle: true,
-                  formatButtonShowsNext: false,
+          child: Column(
+            children: <Widget>[
+              _calendarView
+                  ? TableCalendar(
+                      calendarController: _calendarController,
+                      initialSelectedDay: DateTime.now(),
+                      onDaySelected: (date, _) {
+                        BlocProvider.of<ToDoBloc>(context)
+                            .add(ShowOnSelectedDateEvent(date));
+                      },
+                      initialCalendarFormat: CalendarFormat.week,
+                      headerStyle: HeaderStyle(
+                        centerHeaderTitle: true,
+                        formatButtonShowsNext: false,
+                      ),
+                      calendarStyle: CalendarStyle(
+                        selectedColor: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  : SizedBox(),
+              Expanded(
+                child: Container(
+                  child: BlocBuilder<ToDoBloc, ToDoState>(
+                      bloc: BlocProvider.of(context),
+                      builder: (BuildContext context, ToDoState state) {
+                        return _buildToDoList(_calendarView, state);
+                      }),
                 ),
-                calendarStyle: CalendarStyle(
-                  selectedColor: Theme.of(context).primaryColor,
-                ),
-              )
-            : SizedBox(),
-        Expanded(
-          child: Container(
-            child: BlocBuilder<ToDoBloc, ToDoState>(
-                bloc: BlocProvider.of(context),
-                builder: (BuildContext context, ToDoState state) {
-                  return _buildToDoList(_calendarView, state);
-                }),
+              ),
+            ],
           ),
         ),
-              ],
-            ),
-          ),
         floatingActionButton: GestureDetector(
           onTap: () => Navigator.of(context).pushNamed(
             NewToDo.routeName,
           ),
-          child: MyFAB(Icons.add),
+          child: MyFAB(
+            Icons.add,
+            key: Key('AddFAB'),
+          ),
         ),
       ),
     );

@@ -63,6 +63,7 @@ class _NewToDoState extends State<NewToDo> {
         child: Column(
           children: <Widget>[
             TextField(
+              key: Key('TitleKey'),
               controller: titleController,
               onSubmitted: (_) => addEventIfPossible(),
               decoration: InputDecoration(
@@ -70,6 +71,7 @@ class _NewToDoState extends State<NewToDo> {
               ),
             ),
             TextField(
+              key: Key('DescriptionKey'),
               controller: descriptionController,
               onSubmitted: (_) => addEventIfPossible(),
               keyboardType: TextInputType.multiline,
@@ -93,6 +95,7 @@ class _NewToDoState extends State<NewToDo> {
                     color: Theme.of(context).primaryColor,
                     child: Text(
                       'Choose Date',
+                      key: Key('ChooseDate'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).accentColor,
@@ -108,7 +111,9 @@ class _NewToDoState extends State<NewToDo> {
               child: FlatButton(
                 color: Theme.of(context).primaryColor,
                 onPressed: addEventIfPossible,
-                child: Text('Submit',style: TextStyle(
+                child: Text('Submit',
+                key: Key('SubmitButton'),
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).accentColor,
                 ),),

@@ -95,6 +95,7 @@ class _NewToDoState extends State<NewToDo> {
                       'Choose Date',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                     onPressed: _presentDatePicker,
@@ -107,7 +108,10 @@ class _NewToDoState extends State<NewToDo> {
               child: FlatButton(
                 color: Theme.of(context).primaryColor,
                 onPressed: addEventIfPossible,
-                child: Text('Submit'),
+                child: Text('Submit',style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).accentColor,
+                ),),
               ),
             ),
           ],

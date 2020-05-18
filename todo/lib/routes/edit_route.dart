@@ -87,10 +87,12 @@ class _EditRouteState extends State<EditRoute> {
                 Container(
                   margin: EdgeInsets.only(top: 8),
                   child: FlatButton(
+                    color: Theme.of(context).primaryColor,
                     child: Text(
                       'Choose Date',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                     onPressed: _presentDatePicker,
@@ -102,7 +104,12 @@ class _EditRouteState extends State<EditRoute> {
               alignment: Alignment.centerRight,
               child: FlatButton(
                 onPressed: _editFunction,
-                child: Text('Submit'),
+                color: Theme.of(context).primaryColor,
+                child: Text('Submit',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).accentColor,
+                ),),
               ),
             ),
           ],

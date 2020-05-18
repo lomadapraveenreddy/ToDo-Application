@@ -60,7 +60,7 @@ class MyDrawer extends StatelessWidget {
         child: Column(
       children: <Widget>[
         Container(
-          height: 300,
+          height: 230,
           color: Theme.of(context).primaryColor,
           child: Align(
             alignment: Alignment.centerRight,

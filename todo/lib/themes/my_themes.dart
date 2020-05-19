@@ -9,6 +9,7 @@ Map<THEMES,ThemeData>myThemes={
 
   THEMES.DARKTHEME: ThemeData(
     brightness: Brightness.dark,
+    accentColor: Colors.teal,
   ),
   THEMES.PRIMARYTHEME:ThemeData(
     brightness: Brightness.light,

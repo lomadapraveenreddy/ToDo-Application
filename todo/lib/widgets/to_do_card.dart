@@ -62,34 +62,31 @@ class ToDoCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: object.isCompleted
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).accentColor,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: object.isCompleted
-                        ? null
-                        : Border.all(color: Colors.black),
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                      icon: object.isCompleted
-                          ? Icon(
-                              Icons.done_outline,
+                child: object.isCompleted
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.check,
                               color: Theme.of(context).accentColor,
-                            )
-                          : Icon(
-                              Icons.stop,
-                              color: Colors.black,
-                            ), //IconData(0xe870, fontFamily: _kFontFam, fontPackage: _kFontPkg)
-                      onPressed: () {
-                        BlocProvider.of<ToDoBloc>(context)
-                            .toggleCompletion(object.id);
-                      }),
-                ),
+                            ),
+                            onPressed: () {
+                              BlocProvider.of<ToDoBloc>(context)
+                                  .toggleCompletion(object.id);
+                            }),
+                      )
+                    : IconButton(
+                        icon: Icon(
+                          Icons.check_box_outline_blank,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        onPressed: () {
+                          BlocProvider.of<ToDoBloc>(context)
+                              .toggleCompletion(object.id);
+                        }),
               ),
               SizedBox(
                 width: 20,

@@ -1,55 +1,92 @@
 import 'package:flutter/material.dart';
-import '../widgets/my_drawer.dart';
 
 class AboutRoute extends StatelessWidget {
-  static final routeName='/AboutRoute';
-  const AboutRoute({Key key}) : super(key: key);
+  static final routeName = '/AboutRoute';
 
   @override
   Widget build(BuildContext context) {
+    final  _queStyle=TextStyle(fontSize: 16,fontWeight: FontWeight.bold);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text('About This App'),
         ),
-        drawer: MyDrawer(),
-        body: Column(
-          children: <Widget>[
-            Text(
-              'Hey there!',
-              style: TextStyle(
-                fontSize: 20,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+             horizontal: 10,
+            vertical: 10,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text(
+                'Hey there!',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+                textAlign: TextAlign.start,
               ),
-              textAlign: TextAlign.start,
-            ),
-            Text(
-              'This app helps you to keep track of all your tasks and prioritize on what is important.',
-            ),
-            Text('Go ahead to know everthing about the app'),
-            Text('Want to see the status of the tasks'),
-          ],
+              //SizedBox(height: 30,),
+              Text(
+                'This app helps you to keep track of all your tasks and prioritize on what is important.',
+                textAlign: TextAlign.center,
+              ),
+              //SizedBox(height: 30,),
+              Text('Go ahead to know everthing about the app'),
+              Container(child: Column(
+                children: <Widget>[
+                  Text('Want to see the status of the tasks?',style: _queStyle,),
+                  Text('Mark them as Complete if you are done with the task.'),
+                ],
+              )),
+              //SizedBox(height: 10),
+              Container(
+                margin: EdgeInsets.symmetric(  vertical: 10),
+                child: Text(
+                    'Add a task by clicking on the + button in the bottom right',textAlign: TextAlign.center,style: _queStyle,),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(  vertical: 10),
+                child: Column(
+                  children: <Widget>[
+                    Text('Want to know the tasks you completed?',style: _queStyle,),
+                    Text('Click on Completed in the drawer'),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric( vertical: 10),
+                child: Column(
+                  children: <Widget>[
+                    Text('Want to know the tasks you have to complete?',style: _queStyle,),
+                    Text('Click on Active in the drawer'),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(  vertical: 10),
+                child: Column(
+                  children: <Widget>[
+                    Text('Want to know the your favourite tasks?',style: _queStyle,),
+                    Text('Click on Favourites in the drawer'),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(  vertical: 4),
+                child: Column(
+                  children: <Widget>[
+                    Text('Want to know the tasks you completed?',style: _queStyle,),
+                    Text('Click on Completed in the drawer'),
+                  ],
+                ),
+              ),
+              SizedBox(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-// Hey there !
-
-// This app helps you to keep track of all your tasks and prioritize on what is important.
-
-// Want to see all the task in one glance?
-
-//  Easy.  Click on All tasks on sidebar.
-
-// Want to see all completed tasks in one glance ?
-//  Easy.  Click on Completed on sidebar.
-
-// Want to see all pending tasks in one glance ?
-//  Easy. Click on Incomplete on sidebar.
-
-// Want to see all the tasks on a particular day ?
-//  Easy. Go to calendar view from sidebar.
-
-// Want a task to be highlighted ?
-//  Easy. Mark it as favorite.

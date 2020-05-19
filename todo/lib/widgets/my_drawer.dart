@@ -44,7 +44,7 @@ class MyDrawer extends StatelessWidget {
       'bloc': ToDoBloc,
     },
     {
-      'action': ShowAllEvent(),
+      'action': ShowFavourites(),
       'icon': Icon(Icons.star),
       'text': 'Favourites',
       'bloc': ToDoBloc,
@@ -85,6 +85,7 @@ class MyDrawer extends StatelessWidget {
         GestureDetector(
           child: Text('About This App'),
           onTap: () {
+            Navigator.of(context).pop();
             Navigator.of(context).pushNamed(AboutRoute.routeName);
           },
         ),

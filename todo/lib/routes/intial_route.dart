@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../widgets/my_fab.dart';
 import '../widgets/my_drawer.dart';
@@ -18,6 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   final _calendarController = CalendarController();
   bool _calendarView = false;
   Widget _buildToDoList(_calendarView, ToDoState state) {
@@ -58,6 +61,21 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+
+  @override
+  initState() {
+    super.initState();
+    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project   
+     // If you have skipped STEP 3 then change app_icon to @mipmap/ic_launcher
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('ic_launcher'); 
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+  }
   @override
   Widget build(BuildContext context) {
     Hive.openBox('todoBox');
@@ -72,6 +90,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
                 icon: Icon(Icons.calendar_today),
                 onPressed: () {
+                  _showNotificationWithDefaultSound();
                   setState(() {
                     _calendarView = !_calendarView;
                     _calendarView
@@ -142,6 +161,33 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+  Future _showNotificationWithDefaultSound() async {
+  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      'your channel id', 'your channel name', 'your channel description',
+      importance: Importance.Max, priority: Priority.High);
+  var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+  var platformChannelSpecifics = new NotificationDetails(
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.schedule(
+    0,
+    'New Post',
+    'How to Show Notification in Flutter',
+    DateTime.now(),//.add((Duration(seconds: 1))),
+    platformChannelSpecifics,
+    payload: 'Default_Sound',
+  ).then((value) => print('await'));
+}
+  Future onSelectNotification(String payload) async {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return new AlertDialog(
+          title: Text("PayLoad"),
+          content: Text("Payload : $payload"),
+        );
+      },
     );
   }
 }

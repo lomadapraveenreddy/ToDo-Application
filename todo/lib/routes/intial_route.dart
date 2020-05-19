@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
-import '../schedule_notifications.dart';
+//import '../schedule_notifications.dart';
 import '../widgets/my_fab.dart';
 import '../widgets/my_drawer.dart';
 import '../routes/all_routes.dart';
@@ -59,14 +59,14 @@ class _HomePageState extends State<HomePage> {
       );
     }
   }
-  _scheduleNotification() async {
-      int notificationId = await ScheduledNotifications.scheduleNotification(
-          new DateTime.now().add(new Duration(seconds: 5)).millisecondsSinceEpoch,
-          "Ticker text",
-          "Content title",
-          "Content");
-          print(notificationId);
-}
+//   _scheduleNotification() async {
+//       int notificationId = await ScheduledNotifications.scheduleNotification(
+//           new DateTime.now().add(new Duration(seconds: 5)).millisecondsSinceEpoch,
+//           "Ticker text",
+//           "Content title",
+//           "Content");
+//           print(notificationId);
+// }
   @override
   Widget build(BuildContext context) {
     Hive.openBox('todoBox');
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
                 icon: Icon(Icons.calendar_today),
                 onPressed: () {
-                  _scheduleNotification();
+               //   _scheduleNotification();
                   setState(() {
                     _calendarView = !_calendarView;
                     _calendarView

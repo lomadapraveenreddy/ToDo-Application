@@ -25,7 +25,8 @@ class RouteGenerator {
           return MaterialPageRoute(builder: (_) => EditRoute(args));
         }
         return _errorRoute();
-
+      case '/AboutRoute':
+      return MaterialPageRoute(builder: (_)=>AboutRoute());
       default:
         return _errorRoute();
     }

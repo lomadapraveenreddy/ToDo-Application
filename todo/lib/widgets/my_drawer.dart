@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/routes/all_routes.dart';
 import '../bloc/to_do_bloc/to_do_bloc.dart';
 import '../bloc/theme_bloc/theme_bloc.dart';
 
@@ -103,7 +104,10 @@ class MyDrawer extends StatelessWidget {
             ],
           ),
         ),
-      )
+      ),
+      FlatButton(onPressed: (){
+          Navigator.of(context).pushNamed(AboutRoute.routeName);
+        }, child: Text('About This App')),
       ],
     ));
   }

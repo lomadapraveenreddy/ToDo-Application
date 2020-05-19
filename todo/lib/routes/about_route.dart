@@ -33,6 +33,7 @@ class AboutRoute extends StatelessWidget {
               ),
               //SizedBox(height: 30,),
               Text('Go ahead to know everthing about the app'),
+              Text('Change  theme of the app according to your preference',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
               Container(child: Column(
                 children: <Widget>[
                   Text('Want to see the status of the tasks?',style: _queStyle,),

@@ -81,7 +81,7 @@ class ToDoCard extends StatelessWidget {
                     : IconButton(
                         icon: Icon(
                           Icons.check_box_outline_blank,
-                          color: Theme.of(context).accentColor,
+                          color: Colors.teal,
                         ),
                         onPressed: () {
                           BlocProvider.of<ToDoBloc>(context)

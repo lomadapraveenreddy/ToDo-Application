@@ -21,6 +21,24 @@
     # Calendar view helps us to get to that are to be completed on       particular day
     # All of them can be filtered whether they are completed
 
+#Screenshots of the application
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/home_page.jpg" alt="drawing" width="500" height="800" />
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="500" height="800" />
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/new_to_do.jpg" alt="drawing" width="500" height="800" />
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="500" height="800" />
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="500" height="800" />
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="500" height="800" />
+
+
+
+
+
 # Packages I used
 
   flutter_bloc: ^4.0.0       

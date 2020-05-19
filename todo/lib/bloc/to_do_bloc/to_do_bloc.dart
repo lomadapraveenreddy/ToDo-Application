@@ -89,6 +89,9 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
       yield ToDoState(todoList: list);
     } else if (event is YieldStateEvent) {
       yield ToDoState(todoList: state.todoList);
+    } else if (event is ShowFavourites) {
+      List list= _todoBox.values.toList();
+      List favourites= list.where((element) => element.)
     }
   }
 }

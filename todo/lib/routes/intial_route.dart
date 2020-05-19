@@ -8,6 +8,7 @@ import '../widgets/my_drawer.dart';
 import '../routes/all_routes.dart';
 import '../widgets/to_do_card.dart';
 import '../bloc/to_do_bloc/to_do_bloc.dart';
+import '../bloc/theme_bloc/theme_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -79,6 +80,11 @@ class _HomePageState extends State<HomePage> {
                         : BlocProvider.of<ToDoBloc>(context)
                             .add(ShowAllEvent());
                   });
+                }),
+            IconButton(
+                icon: Icon(Icons.color_lens),
+                onPressed: () {
+                  BlocProvider.of<ThemeBloc>(context).add(ChangeThemeEvent());
                 }),
             IconButton(
                 icon: Icon(Icons.add),

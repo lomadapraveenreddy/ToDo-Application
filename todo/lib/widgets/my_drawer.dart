@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/routes/all_routes.dart';
 import '../bloc/to_do_bloc/to_do_bloc.dart';
-import '../bloc/theme_bloc/theme_bloc.dart';
 
 class MyDrawer extends StatelessWidget {
   List<Widget> drawerItemWidgets(context) {
@@ -45,6 +44,12 @@ class MyDrawer extends StatelessWidget {
       'bloc': ToDoBloc,
     },
     {
+      'action': ShowAllEvent(),
+      'icon': Icon(Icons.star),
+      'text': 'Favourites',
+      'bloc': ToDoBloc,
+    },
+    {
       'action': ShowActiveEvent(),
       'icon': Icon(Icons.work),
       'text': 'Active',
@@ -69,45 +74,23 @@ class MyDrawer extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20),
               child: Text(
                 'ToDo List',
-                style: TextStyle(fontSize: 40, color: Theme.of(context).accentColor),
+                style: TextStyle(
+                    fontSize: 40, color: Theme.of(context).accentColor),
               ),
             ),
           ),
         ),
         ...drawerItemWidgets(context),
+        Expanded(child: SizedBox()),
         GestureDetector(
-        onTap: () {
-           Navigator.of(context).pop();
-          BlocProvider.of<ThemeBloc>(context).add(ChangeThemeEvent());
-        },
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                width: 40,
-              ),
-              //Icon(Icons.check_box_outline_blank),
-              Icon(Icons.color_lens),
-              SizedBox(
-                width: 40,
-              ),
-              Expanded(
-                child: BlocBuilder<ThemeBloc,ThemeState>(builder: (context,state){
-                      return Text(
-                   state.themetype==0?'Light Theme':'Dark Theme',
-                  style: TextStyle(fontSize: 20),
-                );
-                })
-                
-              ),
-            ],
-          ),
+          child: Text('About This App'),
+          onTap: () {
+            Navigator.of(context).pushNamed(AboutRoute.routeName);
+          },
         ),
-      ),
-      FlatButton(onPressed: (){
-          Navigator.of(context).pushNamed(AboutRoute.routeName);
-        }, child: Text('About This App')),
+        SizedBox(
+          height: 10,
+        ),
       ],
     ));
   }

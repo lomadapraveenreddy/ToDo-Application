@@ -35,6 +35,9 @@
 
 <img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/detail.jpg" alt="drawing" width="300" height="500" />
 
+
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/delete.jpg" alt="drawing" width="300" height="500" />
+
 <img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/theme.jpg" alt="drawing" width="300" height="500" />
 
 

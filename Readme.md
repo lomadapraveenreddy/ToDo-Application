@@ -23,7 +23,7 @@
 
 #Screenshots of the application
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/home_page.jpg" alt="drawing" width="500" height="800" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/home_page.jpg" alt="drawing" width="500" height="500" />
 
 <img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="500" height="800" />
 

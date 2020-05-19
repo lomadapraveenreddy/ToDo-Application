@@ -96,13 +96,6 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   BlocProvider.of<ThemeBloc>(context).add(ChangeThemeEvent());
                 }),
-            IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(
-                    NewToDo.routeName,
-                  );
-                }),
             SizedBox(
               width: 15,
             ),

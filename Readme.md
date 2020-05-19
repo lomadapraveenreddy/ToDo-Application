@@ -23,19 +23,19 @@
 
 #Screenshots of the application
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/home_page.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/home_page.jpg" alt="drawing" width="300" height="500" />
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/about.jpg" alt="drawing" width="300" height="500" />
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/calendar_view.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/calendar_view.jpg" alt="drawing" width="300" height="500" />
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/drawer.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/drawer.jpg" alt="drawing" width="300" height="500" />
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/new_to_do.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/new_to_do.jpg" alt="drawing" width="300" height="500" />
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/detail.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/detail.jpg" alt="drawing" width="300" height="500" />
 
-<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/theme.jpg" alt="drawing" width="500" height="500" />
+<img src="https://github.com/lomadapraveenreddy/Praveen_Reddy_IRIS_2020/blob/master/screenshots/theme.jpg" alt="drawing" width="300" height="500" />
 
 
 

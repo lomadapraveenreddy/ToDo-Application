@@ -104,30 +104,29 @@ class DetailRoute extends StatelessWidget {
                 _buildItem('Title:', object.title),
                 if (object.description.isNotEmpty)
                   _buildItem('Description:', object.description),
-                   Expanded(
+                Expanded(
                   flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                   Text(
-                     'Created on...  ' +
-                         DateFormat.yMMMd()
-                             .format(DateTime.parse(object.id)),
-                     style: TextStyle(
-                       fontSize: 16,
-                     ),
-                   ),
-                   Text(
-                     'Finish this before...' +
-                         DateFormat.yMMMd().format(object.deadline),
-                     style: TextStyle(
-                       fontSize: 16,
-                     ),
-                     ),
+                      Text(
+                        'Created on...  ' +
+                            DateFormat.yMMMd()
+                                .format(DateTime.parse(object.id)),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Finish this before...' +
+                            DateFormat.yMMMd().format(object.deadline),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                
                 Padding(
                   padding: const EdgeInsets.only(
                     bottom: 20,
@@ -137,13 +136,26 @@ class DetailRoute extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                EditRoute.routeName,
-                                arguments: object,
-                              );
-                            },
-                            child: MyFAB(Icons.edit)),
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              EditRoute.routeName,
+                              arguments: object,
+                            );
+                          },
+                          child: MyFAB(Icons.edit),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            BlocProvider.of<ToDoBloc>(context)
+                                .toggleFavourite(id);
+                          },
+                          child: MyFAB(object.isFavourite
+                              ? Icons.star
+                              : Icons.star_border),
+                        ),
                       ],
                     ),
                   ),

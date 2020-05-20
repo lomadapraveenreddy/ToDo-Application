@@ -1,6 +1,11 @@
 # To Do Application
 
     To Do is a task management app to help you stay organized and manage your day-to-day tasks. You can use this application to make shopping lists or task lists, plan an event to increase your productivity and focus on what matters to you. You can even add a description that descrbes the task.This application  makes it easy to stay organized and manage your life.
+# Which branch to check
+      Master branch
+
+      # notifications branch has the implementation of local notifications.
+
 
 # How to run the app
 
@@ -17,6 +22,7 @@
     # You can edit a todo work
     # You can delete a todo work
     # App Theme can be changed.
+    # Todo's can be marked  as favourite 
     # You can mark a todo as complete and incomplete
     # Calendar view helps us to get to that are to be completed on       particular day
     # All of them can be filtered whether they are completed

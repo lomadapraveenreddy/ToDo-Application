@@ -30,6 +30,15 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     add(YieldStateEvent());
   }
 
+  void toggleFavourite(String id) {
+    List<dynamic> list = _todoBox.values.toList();
+    int index = list.indexWhere((element) => id == element.id);
+
+    list[index].isFavourite = !list[index].isFavourite;
+    _todoBox.putAt(index, list[index]);
+    add(YieldStateEvent());
+  }
+
   void editToDo(
     String id,
     String title,
@@ -91,8 +100,10 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
       yield ToDoState(todoList: state.todoList);
     } else if (event is ShowFavourites) {
       List list = _todoBox.values.toList();
-      List<ToDoModel> favouritesList =
-          list.where((element) => element.isFavourite);
+      List favouritesList = list.where((element) {
+         
+        return element.isFavourite == true;
+      }).toList();
       yield ToDoState(todoList: favouritesList);
     }
   }
